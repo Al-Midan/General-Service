@@ -9,5 +9,6 @@ const upload = multer();
 const repository = new generalRepository();
 const course = new GeneralUseCase(repository);
 const controller = new generalController(course);
-
+router.post('/complaints/course',upload.single('screenshot'),controller.courseComplaints.bind(controller));
+router.get('/complaints/getCourseComplaints',controller.courseComplaints.bind(controller));
 export default router;
