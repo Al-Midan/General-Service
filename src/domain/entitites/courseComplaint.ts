@@ -1,11 +1,11 @@
 export interface courseComplaint {
     serviceName?: string;
-    orderNumber?: string;
-    courseName: string;
-    instructorName: string;
+    ServicerName?: string;
+    courseName?: string;
+    instructorName?: string;
     subject?: string;
-    description: string;
-    type: 'courses';
+    description?: string;
+    type?: 'courses' | 'services' | 'general';
     complaintPhoto?: FileDetails;
   }
   
