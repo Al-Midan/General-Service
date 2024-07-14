@@ -25,5 +25,13 @@ export class GeneralUseCase implements IgeneralUsecase {
       const response =  await this.repository.getCourseComplaints()
       return  response ? response : null;
     }
+    async   getserviceComplaints(){
+      const response =  await this.repository.getServiceComplaints()
+      return  response ? response : null;
+    }
+    async   getgeneralComplaints(){
+      const response =  await this.repository.getGeneralComplaints()
+      return  response ? response : null;
+    }
 
 }

@@ -1,4 +1,4 @@
-import { IAllCourseComplaints } from "../../domain/entitites/allCourseComplaints";
+import { IAllCourseComplaints, IAllGeneralComplaints, IAllServiceComplaints } from "../../domain/entitites/allCourseComplaints";
 import { courseComplaint } from "../../domain/entitites/courseComplaint";
 import { IComplaint } from "../../infrastructure/database/Model/courseComplaint";
 import { IgeneralComplaint } from "../../infrastructure/database/Model/generalComplaint";
@@ -9,4 +9,6 @@ export interface IgeneralUsecase {
     serviceComplaints(allvalues:courseComplaint):Promise<IserviceComplaint | null>;
     generalComplaints(allvalues:courseComplaint):Promise<IgeneralComplaint | null>;
     getCourseComplaints():Promise<IAllCourseComplaints[] | null>;
+    getserviceComplaints():Promise<IAllServiceComplaints[] | null>;
+    getgeneralComplaints():Promise<IAllGeneralComplaints[] | null>;
 }

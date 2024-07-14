@@ -30,6 +30,24 @@ export class generalController {
       res.status(500).json({message:"Error Occured in Get All Course Complaints"})
     }
   }
+  async getserviceComplaints(req: Request, res: Response){
+    try {
+      const response =  await this.generalUsecase.getserviceComplaints()
+    res.status(200).json({message:"Successfully Got it All service Complaints",response})
+    } catch (error) {
+      console.error("Error occurred in getserviceComplaints", error);
+      res.status(500).json({message:"Error Occured in Get All service Complaints"})
+    }
+  }
+  async getgeneralComplaints(req: Request, res: Response){
+    try {
+      const response =  await this.generalUsecase.getgeneralComplaints()
+    res.status(200).json({message:"Successfully Got it All General Complaints",response})
+    } catch (error) {
+      console.error("Error occurred in getgeneralComplaints", error);
+      res.status(500).json({message:"Error Occured in Get All General Complaints"})
+    }
+  }
   async serviceComplaints(req: Request, res: Response){
     
     try {
