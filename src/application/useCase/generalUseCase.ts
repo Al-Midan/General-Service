@@ -1,7 +1,8 @@
 import { courseComplaint } from "../../domain/entitites/courseComplaint";
 import { IgeneralRepository } from "../../infrastructure/interface/IgeneralRepository";
 import { IgeneralUsecase } from "../interface/IgeneralUsecase";
-
+import { kafkaProducer } from "../../infrastructure/brokers/kafkaBroker/kafkaProducer";
+import { kafkaConsumer } from "../../infrastructure/brokers/kafkaBroker/kafkaConsumer";
 
 export class GeneralUseCase implements IgeneralUsecase {
   private repository: IgeneralRepository;
@@ -32,6 +33,10 @@ export class GeneralUseCase implements IgeneralUsecase {
     async   getgeneralComplaints(){
       const response =  await this.repository.getGeneralComplaints()
       return  response ? response : null;
+    }
+    async   getEnrolledCourses(userId: string){
+      await kafkaProducer.sendEnrolledCoursesRequest(userId);
+      return await kafkaConsumer.waitForEnrolledCoursesResponse(userId);
     }
 
 }

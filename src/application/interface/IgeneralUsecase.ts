@@ -11,4 +11,5 @@ export interface IgeneralUsecase {
     getCourseComplaints():Promise<IAllCourseComplaints[] | null>;
     getserviceComplaints():Promise<IAllServiceComplaints[] | null>;
     getgeneralComplaints():Promise<IAllGeneralComplaints[] | null>;
+    getEnrolledCourses(userId:string):any;
 }

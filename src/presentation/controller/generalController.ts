@@ -1,6 +1,8 @@
 // userController.ts
 import { NextFunction, Request, Response } from "express";
 import { IgeneralUsecase } from "../../application/interface/IgeneralUsecase";
+import { kafkaProducer } from "../../infrastructure/brokers/kafkaBroker/kafkaProducer";
+import { kafkaConsumer } from "../../infrastructure/brokers/kafkaBroker/kafkaConsumer";
 
 export class generalController {
   private generalUsecase: IgeneralUsecase;
@@ -79,4 +81,19 @@ export class generalController {
     }
     
   }
+  async AllenrollCourse(req: Request, res: Response) {
+    try {
+      const userId = req.params.userId;
+      console.log("userId", userId);
+      
+      await kafkaProducer.sendEnrolledCoursesRequest(userId);
+      const response = await kafkaConsumer.waitForEnrolledCoursesResponse(userId);
+      
+      res.status(200).json({ message: "Enrolled Courses Received successfully", response });
+    } catch (error) {
+      console.error("Error occurred in AllenrollCourse", error);
+      res.status(500).json({ message: "Error occurred in AllenrollCourse" });
+    }
+  }
+  
 }

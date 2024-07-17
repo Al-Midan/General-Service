@@ -15,4 +15,5 @@ router.post('/complaints/general',upload.single('screenshot'),controller.general
 router.get('/complaints/getCourseComplaints',controller.getcourseComplaints.bind(controller));
 router.get('/complaints/getServiceComplaints',controller.getserviceComplaints.bind(controller));
 router.get('/complaints/getGeneralComplaints',controller.getgeneralComplaints.bind(controller));
+router.get('/complaints/AllenrollCourse/:userId',controller.AllenrollCourse.bind(controller));
 export default router;
