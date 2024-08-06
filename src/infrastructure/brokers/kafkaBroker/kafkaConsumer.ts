@@ -1,16 +1,17 @@
 import { KafkaModule } from "../../../utils/kafka/kafkaModule";
-import { KafkaMessage } from 'kafkajs';
+import { KafkaMessage } from "kafkajs";
 
 class KafkaConsumer extends KafkaModule {
   private responseHandlers: Map<string, (courses: any) => void> = new Map();
 
   constructor() {
-    super('general-service-consumer', ['localhost:9092']);
+    //super('general-service-consumer', ['localhost:9092']);
+    super("user-service-producer", ["kafka:29092"]);
   }
 
   async init() {
     await this.connect();
-    await this.subscribeToTopic('enrolled-courses-response');
+    await this.subscribeToTopic("enrolled-courses-response");
     this.startConsuming();
   }
 

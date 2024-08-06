@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc build",
+    "build": "tsc",
     "start": "npx tsc &&  node ./dist/app.ts",
     "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
