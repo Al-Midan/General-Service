@@ -1,9 +1,8 @@
-// userController.ts
 import { NextFunction, Request, Response } from "express";
 import { IgeneralUsecase } from "../../application/interface/IgeneralUsecase";
 import { kafkaProducer } from "../../infrastructure/brokers/kafkaBroker/kafkaProducer";
 import { kafkaConsumer } from "../../infrastructure/brokers/kafkaBroker/kafkaConsumer";
-
+import axios from "axios";
 export class generalController {
   private generalUsecase: IgeneralUsecase;
   constructor(generalUsecase: IgeneralUsecase) {
@@ -83,11 +82,13 @@ export class generalController {
   }
   async AllenrollCourse(req: Request, res: Response) {
     try {
-      const userId = req.params.userId;
-      console.log("userId", userId);
-      
-      await kafkaProducer.sendEnrolledCoursesRequest(userId);
-      const response = await kafkaConsumer.waitForEnrolledCoursesResponse(userId);
+      const id = req.params.userId;      
+      // await kafkaProducer.sendEnrolledCoursesRequest(userId);
+      // const response = await kafkaConsumer.waitForEnrolledCoursesResponse(userId);
+      const datas = await axios.get(
+        `http://13.71.112.129/course-service/getEnrolledCourseWithId/${id}`
+      );
+        const response = datas.data.response;
       
       res.status(200).json({ message: "Enrolled Courses Received successfully", response });
     } catch (error) {
