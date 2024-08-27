@@ -3,17 +3,17 @@ import { Upload } from "@aws-sdk/lib-storage";
 
 const s3config = new S3Client({
   credentials: {
-    accessKeyId: process.env.S3_ACCESS_KEY || "AKIAU5ZGISIVSEPALZNZ",
+    accessKeyId: process.env.S3_ACCESS_KEY ||"",
     secretAccessKey:
       process.env.S3_SECRET_ACCESS_KEY ||
-      "rnnZBSBlb2KZCdox8qERief1DJJlMydZzOAHhkZO",
+      "",
   },
-  region: process.env.S3_REGION || "ap-south-1",
+  region: process.env.S3_REGION || "",
 });
 
 const uploadS3Image = async (file: any) => {
   const params = {
-    Bucket: process.env.S3_COURSE_BUCKET_NAME || "almidancoursecomplaint",
+    Bucket: process.env.S3_COURSE_BUCKET_NAME || "",
     Key: Date.now().toString() + "-" + file.originalname,
     Body: file.buffer,
     ContentType: file.mimetype,
